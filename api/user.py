@@ -81,3 +81,23 @@ def logout():
     return "logged out"
 
 
+@user.route('/<id>', methods=["PUT"])
+# @login_required
+def update(id):
+    #we aren't telling the code what <id> is
+    # pay_file = request.files ----stuff for image
+    payload = request.form.to_dict()
+    payload['email'].lower()
+    payload['password'] = generate_password_hash(payload['password'])
+    query = models.User.update(**payload).where(models.User.id==id)
+    query.execute()
+    user = models.User.get_by_id(id)
+    user_dict = model_to_dict(user)
+    del user_dict['password']
+
+    print(payload, '<-payload', query, '<-query')
+    return jsonify(data=user_dict, status={"code": 200, "message": "resource updated successfully"})
+    
+    # file_picture_path = save_picture(dict_file['file'])
+    # payload['image'] = file_picture_path
+    # current_user.image = file_picture_path
