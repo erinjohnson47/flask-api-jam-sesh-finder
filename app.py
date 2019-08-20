@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 import models 
 
-# from api.user import user
+from api.user import user
 # from api.event import event
 
 DEBUG = True
@@ -28,7 +28,7 @@ login_manager.init_app(app)
 
 
 # CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
-
+app.register_blueprint(user)
 
 
 
