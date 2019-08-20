@@ -1,9 +1,10 @@
 from flask import Flask, g 
 from flask_cors import CORS
 from flask_login import LoginManager
-# import models 
+import models 
 
-
+# from api.user import user
+# from api.event import event
 
 DEBUG = True
 PORT = 8000
@@ -31,17 +32,17 @@ login_manager.init_app(app)
 
 
 
-# @app.before_request
-# def before_request():
-#     """Connect to the database before each request"""
-#     g.db = models.DATABASE
-#     g.db.connect()
+@app.before_request
+def before_request():
+    """Connect to the database before each request"""
+    g.db = models.DATABASE
+    g.db.connect()
 
-# @app.after_request
-# def after_request(response):
-#     '''Close the database connection after each request'''
-#     g.db.close()
-#     return response
+@app.after_request
+def after_request(response):
+    '''Close the database connection after each request'''
+    g.db.close()
+    return response
 
 
 @app.route('/')
@@ -53,7 +54,7 @@ def index():
 
 
 if __name__ == '__main__':
-    # models.initialize()
+    models.initialize()
     app.run(debug=DEBUG, port=PORT)
 
 
