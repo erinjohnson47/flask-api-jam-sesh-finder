@@ -82,9 +82,8 @@ def logout():
 
 
 @user.route('/<id>', methods=["PUT"])
-# @login_required
+@login_required
 def update(id):
-    #we aren't telling the code what <id> is
     # pay_file = request.files ----stuff for image
     payload = request.form.to_dict()
     payload['email'].lower()
@@ -101,3 +100,10 @@ def update(id):
     # file_picture_path = save_picture(dict_file['file'])
     # payload['image'] = file_picture_path
     # current_user.image = file_picture_path
+
+@user.route('/<id>', methods=["Delete"])
+def delete_user(id):
+    query = models.User.delete().where(models.User.id==id)
+    query.execute()
+    return jsonify(data='resource successfully deleted', status={"code": 200, "message": "resource deleted successfully"})
+
