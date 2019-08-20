@@ -9,7 +9,7 @@ import secrets
 from flask import Blueprint, request, jsonify, url_for, send_file
 
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, login_required, logout_user
 from playhouse.shortcuts import model_to_dict
 
 
@@ -74,7 +74,10 @@ def login():
     except models.DoesNotExist:
         return jsonify(data={}, status={"code": 401, "message": "Username or Password is incorrect"})
 
-
-
+@user.route('/logout', methods=["GET"])
+@login_required
+def logout():
+    logout_user()
+    return "logged out"
 
 
