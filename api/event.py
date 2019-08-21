@@ -16,9 +16,9 @@ def get_all_events():
 
 @event.route('/', methods=["POST"])
 def create_event():
-    payload = request.form.to_dict()
+    payload = request.get_json()
     print(payload, "payload")
-    event = models.Event.create(**payload)
+    event = models.Event.create(**payload, created_by = 1)
     event_dict = model_to_dict(event)
     return jsonify(data=event_dict, status={"code": 201, "message": "Success"})
 
