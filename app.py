@@ -23,6 +23,7 @@ def load_user(userid):
 
 
 CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(event, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(user)
 app.register_blueprint(event)
 

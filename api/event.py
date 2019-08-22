@@ -20,6 +20,7 @@ def create_event():
     print(payload, "payload")
     event = models.Event.create(**payload, created_by = 1)
     event_dict = model_to_dict(event)
+    print(event_dict, '<-event_dict in create event route in flask')
     return jsonify(data=event_dict, status={"code": 201, "message": "Success"})
 
 @event.route('/<id>', methods=["PUT"])
