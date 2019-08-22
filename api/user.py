@@ -82,10 +82,10 @@ def login():
         return jsonify(data={}, status={"code": 401, "message": "Username or Password is incorrect"})
 
 @user.route('/logout', methods=["GET"])
-@login_required
 def logout():
     logout_user()
-    return "logged out"
+    print('this is the logout route in flask')
+    return jsonify(status={"code": 200, "message": "Logged out"})
 
 
 @user.route('/<id>', methods=["PUT"])
