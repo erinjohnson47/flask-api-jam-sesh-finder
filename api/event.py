@@ -27,11 +27,14 @@ def create_event():
 
 @event.route('/<id>', methods=["PUT"])
 def update_event(id):
-    payload = request.get.json()
+    payload = request.get_json()
     print(payload)
     query = models.Event.update(**payload).where(models.Event.id==id)
     query.execute()
-    return jsonify(data=model_to_dict(models.Event.get_by_id(id)), status={"code": 200, "message": "resource updated successfully"})
+    updated_event = models.Event.get_by_id(id)
+    dict_event = model_to_dict(updated_event)
+    print(dict_event)
+    return jsonify(data=dict_event, status={"code": 200, "message": "resource updated successfully"})
 
 @event.route('/<id>', methods=["Delete"])
 def delete_event(id):
