@@ -27,7 +27,8 @@ def create_event():
 
 @event.route('/<id>', methods=["PUT"])
 def update_event(id):
-    payload = request.form.to_dict()
+    payload = request.get.json()
+    print(payload)
     query = models.Event.update(**payload).where(models.Event.id==id)
     query.execute()
     return jsonify(data=model_to_dict(models.Event.get_by_id(id)), status={"code": 200, "message": "resource updated successfully"})
