@@ -19,10 +19,19 @@ def get_all_events():
 def create_event():
     payload = request.get_json()
     print(payload, "payload")
-    print(current_user, type(current_user), current_user.get_id(), 'this is current_user right before event creation')
     event = models.Event.create(**payload, created_by = current_user.get_id())
     event_dict = model_to_dict(event)
     print(event_dict, '<-event_dict in create event route in flask')
+    return jsonify(data=event_dict, status={"code": 201, "message": "Success"})
+
+@event.route('/join/', methods=["POST"])
+def join_event():
+    payload = request.get_json()
+    print(payload, "payload", type(payload)), 'payload type'
+    print(current_user, type(current_user), current_user.get_id(), 'this is current_user right before event creation')
+    event = models.UserEvent.create(event=payload, user=current_user.get_id())
+    event_dict = model_to_dict(event)
+    print(event_dict, '<-event_dict in join event route in flask')
     return jsonify(data=event_dict, status={"code": 201, "message": "Success"})
 
 @event.route('/<id>', methods=["PUT"])

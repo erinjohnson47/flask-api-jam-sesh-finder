@@ -33,14 +33,9 @@ class UserEvent(BaseModel):
     event = ForeignKeyField(Event, backref='events')
 
 
-     
-
-
-
-
 def initialize():
     DATABASE.connect()
-    DATABASE.create_tables([User, Event], safe=True) 
+    DATABASE.create_tables([User, Event, UserEvent], safe=True) 
     print("TABLES CREATED")
     DATABASE.close()
 
