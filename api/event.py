@@ -34,6 +34,16 @@ def join_event():
     print(event_dict, '<-event_dict in join event route in flask')
     return jsonify(data=event_dict, status={"code": 201, "message": "Success"})
 
+@event.route('/join/', methods=["GET"])
+def get_all_user_events():
+    print('event get all route')
+    try:
+        events = [model_to_dict(event) for event in models.UserEvent.select()]
+        print(events)
+        return jsonify(data=events, status={"code": 200, "message": "Success"})
+    except models.DoesNotExist:
+        return jsonify(data={}, status={"code": 401, "message": "Error getting the resources"})
+
 @event.route('/<id>', methods=["PUT"])
 def update_event(id):
     payload = request.get_json()
