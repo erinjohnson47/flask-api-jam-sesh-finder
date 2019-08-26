@@ -3,7 +3,7 @@ from flask_login import UserMixin
 import datetime 
 
 
-DATABASE = SqliteDatabase('jams.sqlite') 
+DATABASE = SqliteDatabase('jamss.sqlite') 
 
 class BaseModel(Model):
     class Meta:
