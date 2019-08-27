@@ -5,8 +5,8 @@ import os
 from playhouse.db_url import connect
 
 
-# DATABASE = connect(os.environ.get('DATABASE_URL')) 
-DATABASE = SqliteDatabase('jamss.sqlite')
+DATABASE = connect(os.environ.get('DATABASE_URL')) 
+# DATABASE = SqliteDatabase('jamss.sqlite')
 
 class BaseModel(Model):
     class Meta:
