@@ -23,8 +23,8 @@ def load_user(userid):
         return None
 
 
-CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(event, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000','https://jamband.herokuapp.com'], supports_credentials=True)
+CORS(event, origins=['http://localhost:3000',"https://jamband.herokuapp.com"], supports_credentials=True)
 app.register_blueprint(user)
 app.register_blueprint(event)
 
